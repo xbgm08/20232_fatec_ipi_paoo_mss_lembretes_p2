@@ -14,26 +14,45 @@ app.use(express.json())
     "2": {"id": "2", "texto": "Ver um filme"}
   }
 */
+
+const funcoes = {
+  LembreteClassificado: async (lembrete) => {
+    await axios.post(
+      'http://localhost:10000/eventos',
+      {
+        type: 'LembreteAtualizado',
+        payload: {
+          id: lembrete.id,
+          texto: lembrete.texto,
+          status: lembrete.status
+        }
+      }
+    )
+  }
+}
+
 const lembretes = {}
 let id = 1
 
 //GET /lembretes
-app.get('/lembretes', (req, res) => res.send(lembretes))  
+app.get('/lembretes', (req, res) => res.send(lembretes))
 
 //POST /eventos
 app.post('/eventos', (req, res) => {
-  try{
+  try {
     const evento = req.body
     console.log(evento)
+    funcoes[req.body.type](req.body.payload)
   }
-  catch(e){}
-  res.status(200).end() 
+  catch (e) { }
+  res.status(200).end()
 })
 
 //POST /lembretes {texto: "Fazer cafe"}
 app.post('/lembretes', async (req, res) => {
   const texto = req.body.texto
-  const lembrete = {id, texto}
+  const status = 'aguardando'
+  const lembrete = { id, texto, status }
   lembretes[id] = lembrete
   id++
   //isso é a emissão de um evento

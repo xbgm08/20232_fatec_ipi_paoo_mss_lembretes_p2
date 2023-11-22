@@ -13,6 +13,9 @@ const funcoes = {
   LembreteCriado: (lembrete) => {
     baseConsolidada[lembrete.id] = lembrete
   },
+  LembreteAtualizado: (lembrete) => {
+    baseConsolidada[lembrete.id] = lembrete
+  },
   ObservacaoCriada: (observacao) => {
     const observacoes = baseConsolidada[observacao.lembreteId]['observacoes'] || []
     observacoes.push(observacao)
@@ -38,6 +41,7 @@ app.post('/eventos', (req, res) => {
   try{
     //princípio aberto/fechado
     const evento = req.body
+    console.log(req.body)
     funcoes[evento.type](evento.payload)
   }
   catch(e){}

@@ -15,6 +15,7 @@ const funcoes = {
   ObservacaoClassificada: async (observacao) => {
     const observacoes = 
       observacoesPorLembreteId[observacao.lembreteId]
+      console.log(typeof(observacoes))
     const obsParaAtualizar = observacoes.find(o => o.id === observacao.id)
     obsParaAtualizar.status = observacao.status
     await axios.post(
