@@ -41,7 +41,6 @@ app.post('/eventos', (req, res) => {
   try{
     //princípio aberto/fechado
     const evento = req.body
-    console.log(req.body)
     funcoes[evento.type](evento.payload)
   }
   catch(e){}
@@ -55,10 +54,6 @@ app.listen(
     console.log(`Consulta: ${PORT}`)
     const eventos = await axios.get('http://localhost:10000/eventos')
     eventos.data.forEach((valor, indice, colecao) => {
-      // try{
-      //   undefined()
-      // }
-      // catch(e){}
       if(funcoes[valor.type]){
         funcoes[valor.type](valor.payload)
       }

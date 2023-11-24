@@ -15,7 +15,6 @@ const funcoes = {
   ObservacaoClassificada: async (observacao) => {
     const observacoes = 
       observacoesPorLembreteId[observacao.lembreteId]
-      console.log(typeof(observacoes))
     const obsParaAtualizar = observacoes.find(o => o.id === observacao.id)
     obsParaAtualizar.status = observacao.status
     await axios.post(
@@ -58,8 +57,6 @@ app.get(
 //POST /eventos
 app.post('/eventos', (req, res) => {
   try{
-    const evento = req.body
-    console.log(evento)
     funcoes[req.body.type](req.body.payload)
   }
   catch(e){}

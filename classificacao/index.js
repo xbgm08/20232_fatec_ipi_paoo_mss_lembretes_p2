@@ -39,8 +39,6 @@ const funcoes = {
 }
 
 app.post('/eventos', async (req, res) => {
-  // if (funcoes[req.body.type])
-  //   funcoes[req.body.type](req.body.payload)
   try {
     funcoes[req.body.type](req.body.payload)
   }

@@ -40,8 +40,6 @@ app.get('/lembretes', (req, res) => res.send(lembretes))
 //POST /eventos
 app.post('/eventos', (req, res) => {
   try {
-    const evento = req.body
-    console.log(evento)
     funcoes[req.body.type](req.body.payload)
   }
   catch (e) { }
